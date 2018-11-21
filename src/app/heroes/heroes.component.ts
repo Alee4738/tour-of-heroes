@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Hero } from '../hero';
 import { FormsModule } from '@angular/forms';
-import { HEROES } from '../mock-heroes'
+import { HEROES } from '../mock-heroes';
 
 @Component({
   selector: 'app-heroes',
@@ -10,15 +10,18 @@ import { HEROES } from '../mock-heroes'
 })
 export class HeroesComponent implements OnInit {
   heroes = HEROES;
-  selectedHero: Hero;
+  @Output() heroSelected: EventEmitter<Hero> = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   onSelect(hero: Hero): void {
-    this.selectedHero = hero;
+    // emit the hero selected
+    this.heroSelected.emit(hero);
   }
+
 
 }
