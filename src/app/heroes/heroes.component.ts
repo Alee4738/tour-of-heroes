@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Hero } from '../hero';
 import { FormsModule } from '@angular/forms';
 import { HeroService } from '../hero.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
