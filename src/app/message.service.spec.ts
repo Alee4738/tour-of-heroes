@@ -1,18 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import {
-  IMessageService,
-  MessageServiceProvider,
-  MessageServiceToken,
-} from './message.service';
+import { IMessageService, MessageServiceToken } from './message.service';
 
 describe('MessageService', () => {
   let service: IMessageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [MessageServiceProvider],
-    });
+    TestBed.configureTestingModule({});
     service = TestBed.get(MessageServiceToken);
   });
 

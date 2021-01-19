@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { InjectionToken, Provider } from '@angular/core';
+import { inject, InjectionToken } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Hero } from './hero';
@@ -13,6 +13,14 @@ export interface IHeroService {
   deleteHero(hero: Hero): Observable<any>;
   searchHeroes(term: string): Observable<Hero[]>;
 }
+
+export const HeroServiceToken = new InjectionToken<IHeroService>(
+  'HeroService',
+  {
+    factory: () =>
+      new HeroService(inject(MessageServiceToken), inject(HttpClient)),
+  }
+);
 
 class HeroService implements IHeroService {
   private heroesUrl = 'api/heroes'; // URL to web api
@@ -107,11 +115,3 @@ class HeroService implements IHeroService {
     );
   }
 }
-
-export const HeroServiceToken = new InjectionToken<IHeroService>('HeroService');
-
-export const HeroServiceProvider: Provider = {
-  provide: HeroServiceToken,
-  deps: [MessageServiceToken, HttpClient],
-  useClass: HeroService,
-};

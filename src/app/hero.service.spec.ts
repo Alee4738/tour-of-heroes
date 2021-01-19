@@ -1,23 +1,13 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import {
-  HeroServiceProvider,
-  HeroServiceToken,
-  IHeroService,
-} from './hero.service';
-import { MessageServiceProvider } from './message.service';
+import { HeroServiceToken, IHeroService } from './hero.service';
 
 describe('HeroService', () => {
   let service: IHeroService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        HeroServiceProvider,
-        MessageServiceProvider,
-        HttpClient,
-        HttpHandler,
-      ],
+      providers: [HttpClient, HttpHandler],
     });
 
     service = TestBed.get(HeroServiceToken);
