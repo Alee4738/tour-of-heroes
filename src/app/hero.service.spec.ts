@@ -1,12 +1,29 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-
-import { HeroService } from './hero.service';
+import {
+  HeroServiceProvider,
+  HeroServiceToken,
+  IHeroService,
+} from './hero.service';
+import { MessageServiceProvider } from './message.service';
 
 describe('HeroService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let service: IHeroService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        HeroServiceProvider,
+        MessageServiceProvider,
+        HttpClient,
+        HttpHandler,
+      ],
+    });
+
+    service = TestBed.get(HeroServiceToken);
+  });
 
   it('should be created', () => {
-    const service: HeroService = TestBed.get(HeroService);
     expect(service).toBeTruthy();
   });
 });

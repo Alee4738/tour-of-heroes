@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { InjectionToken, Provider } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class MessageService {
+export interface IMessageService {
+  add(message: string): void;
+  clear(): void;
+}
+
+class MessageService implements IMessageService {
   messages: string[] = [];
 
   add(message: string) {
@@ -14,3 +16,12 @@ export class MessageService {
     this.messages = [];
   }
 }
+
+export const MessageServiceToken = new InjectionToken<IMessageService>(
+  'MessageService'
+);
+
+export const MessageServiceProvider: Provider = {
+  provide: MessageServiceToken,
+  useClass: MessageService,
+};
